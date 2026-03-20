@@ -34,11 +34,16 @@ jobs:
       ISSUE_URL: ${{ needs.find_exercise.outputs.issue-url }}
 
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@fa2e9d605c4eeb9fcad4c99c224cee0c6c7f3594 # v2.16.0
+        with:
+          egress-policy: audit
+
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Get response templates
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           repository: skills/exercise-toolkit
           path: exercise-toolkit
@@ -112,7 +117,7 @@ jobs:
 
       - name: Build message - step finished
         id: build-message-step-finish
-        uses: skills/action-text-variables@v2
+        uses: skills/action-text-variables@3b6c75e091007b8a7660c17071aa2503cccf6af2 # v2.0.1
         with:
           template-file: exercise-toolkit/markdown-templates/step-feedback/step-finished-prepare-next-step.md
           template-vars: |
@@ -134,11 +139,16 @@ jobs:
       ISSUE_URL: ${{ needs.find_exercise.outputs.issue-url }}
 
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@fa2e9d605c4eeb9fcad4c99c224cee0c6c7f3594 # v2.16.0
+        with:
+          egress-policy: audit
+
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
       - name: Get response templates
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
         with:
           repository: skills/exercise-toolkit
           path: exercise-toolkit
@@ -146,7 +156,7 @@ jobs:
 
       - name: Build comment - add step content
         id: build-comment
-        uses: skills/action-text-variables@v2
+        uses: skills/action-text-variables@3b6c75e091007b8a7660c17071aa2503cccf6af2 # v2.0.1
         with:
           template-file: "${{ env.STEP_4_FILE }}"
           template-vars: |
